@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import './presentation/my_flutter_app_icons.dart';
 
 void main() {
   runApp(const MyApp());
@@ -53,6 +54,8 @@ class _MyHomePageState extends State<MyHomePage> {
   int randomNumber = generateRandomNumber();
   String resultText = '';
   String buttonText = 'Guess';
+  Set<int> scores = {};
+  int count = 1;
 
   void handleReset() {
     randomNumber = generateRandomNumber();
@@ -60,6 +63,7 @@ class _MyHomePageState extends State<MyHomePage> {
       inputController.text = '';
       resultText = '';
       buttonText = 'Guess';
+      count = 1;
     });
   }
 
@@ -107,8 +111,10 @@ class _MyHomePageState extends State<MyHomePage> {
         String clueText = '';
         if (parsedNumber < randomNumber) {
           clueText = 'Try higher';
+          count++;
         } else if (parsedNumber > randomNumber) {
           clueText = 'Try lower';
+          count++;
         } else {
           inputController.text = '';
           clueText = 'You guessed right.';
@@ -118,6 +124,7 @@ class _MyHomePageState extends State<MyHomePage> {
             context: context,
             builder: (BuildContext context) => _buildPopupDialog(context),
           );
+          scores.add(count);
         }
         resultText = 'You tried $inputNumber\n$clueText';
       }
@@ -129,7 +136,28 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       backgroundColor: const Color.fromRGBO(220, 220, 220, 1),
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(widget.title),
+            IconButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => LeaderBoard(
+                      title: 'Leaderboard',
+                      data: scores.toList(),
+                    ),
+                  ),
+                );
+              },
+              icon: const Icon(
+                MyFlutterApp.award,
+              ),
+            ),
+          ],
+        ),
         centerTitle: true,
       ),
       body: SingleChildScrollView(
@@ -223,6 +251,73 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ),
       ), // This trailing comma makes auto-formatting nicer for build methods.
+    );
+  }
+}
+
+class LeaderBoard extends StatelessWidget {
+  const LeaderBoard({Key? key, required this.title, required this.data})
+      : super(key: key);
+  final String title;
+  final List<int> data;
+
+  List<Widget> generateCards() {
+    data.sort((int a, int b) => a.compareTo(b));
+    return data.asMap().entries.map(
+      (dataEntry) {
+        int index = dataEntry.key;
+        int value = dataEntry.value;
+        return FractionallySizedBox(
+          widthFactor: 1,
+          child: SizedBox(
+            height: 50,
+            child: Card(
+              color: index < 3 ? Colors.green : Colors.white,
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    margin: const EdgeInsets.only(
+                      left: 20.0,
+                    ),
+                    child: Text(
+                      '${index + 1}. You guessed in $value tries',
+                      style: const TextStyle(
+                        fontSize: 20,
+                      ),
+                    ),
+                  ),
+                  Container(
+                    margin: const EdgeInsets.only(
+                      right: 15.0,
+                    ),
+                    child: index == 0 ? const Icon(MyFlutterApp.award_1) : null,
+                  ),
+                ],
+              ),
+            ),
+          ),
+        );
+      },
+    ).toList();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: const Color.fromRGBO(220, 220, 220, 1),
+      appBar: AppBar(
+        title: Text(title),
+        centerTitle: true,
+      ),
+      body: SingleChildScrollView(
+        child: Center(
+          child: Column(
+            children: generateCards(),
+          ),
+        ),
+      ),
     );
   }
 }
