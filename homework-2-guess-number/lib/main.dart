@@ -198,7 +198,6 @@ class _MyHomePageState extends State<MyHomePage> {
                             controller: inputController,
                             inputFormatters: <TextInputFormatter>[
                               CustomMinMaxValueInputFormatter(),
-                              LengthLimitingTextInputFormatter(3),
                               FilteringTextInputFormatter.digitsOnly,
                             ],
                             enabled: buttonText == 'Guess',
