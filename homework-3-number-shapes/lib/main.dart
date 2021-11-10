@@ -33,18 +33,12 @@ class MyHomePage extends StatefulWidget {
 
 bool isSquare(num value) {
   num x = sqrt(value).round();
-  if (x * x == value) {
-    return true;
-  }
-  return false;
+  return x * x == value;
 }
 
 bool isCube(num value) {
   num x = pow(value, 1 / 3).round();
-  if (x * x * x == value) {
-    return true;
-  }
-  return false;
+  return x * x * x == value;
 }
 
 bool isSquareAndCube(value) {
