@@ -1,11 +1,57 @@
+import 'dart:convert';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import './presentation/my_flutter_app_icons.dart';
 
 void main() {
   runApp(const MyApp());
+  sharedPrefInit();
+}
+
+void sharedPrefInit() async {
+  try {
+    /// Checks if shared preference exist
+    Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+    final SharedPreferences prefs = await _prefs;
+    prefs.getString("app-name");
+  } catch (err) {
+    /// setMockInitialValues initiates shared preference
+    /// Adds app-name
+    SharedPreferences.setMockInitialValues({});
+    Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+    final SharedPreferences prefs = await _prefs;
+    prefs.setString("app-name", "my-app");
+  }
+}
+
+/// Adding a list or object
+/// Use import 'dart:convert'; for jsonEncode
+dynamic putJson(key, val) async {
+  Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+  final SharedPreferences prefs = await _prefs;
+  var valString = jsonEncode(val);
+  var _res = prefs.setString("$key", valString);
+  return _res;
+}
+
+/// Get list or object
+/// Use import 'dart:convert'; for jsonEncode
+/// Argument [key]
+dynamic getJson(key) async {
+  Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+  final SharedPreferences prefs = await _prefs;
+  String? jsonString = prefs.getString("$key");
+  var _res = jsonDecode(jsonString!);
+  return _res;
+}
+
+Future reset() async {
+  Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+  final SharedPreferences prefs = await _prefs;
+  prefs.clear();
 }
 
 class MyApp extends StatelessWidget {
@@ -67,6 +113,17 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  @override
+  initState() {
+    super.initState();
+    initScores();
+  }
+
+  initScores() async {
+    List valuesList = await getJson('scores');
+    scores = {...valuesList};
+  }
+
   void handleConfirm() {
     inputController.text = '';
     Navigator.of(context).pop();
@@ -125,6 +182,7 @@ class _MyHomePageState extends State<MyHomePage> {
             builder: (BuildContext context) => _buildPopupDialog(context),
           );
           scores.add(count);
+          putJson('scores', scores.toList());
         }
         resultText = 'You tried $inputNumber\n$clueText';
       }
