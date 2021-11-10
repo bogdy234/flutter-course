@@ -1,6 +1,6 @@
 # homework_3_number_shapes
 
-Input a number and see if it is square or triangular.
+Input a number and see if it is square or cube.
 
 ## Getting Started
 
