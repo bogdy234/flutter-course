@@ -20,5 +20,6 @@ https://user-images.githubusercontent.com/53002105/140926222-eab61e69-2b93-4927-
 
 
 After adding persistent leaderboard: 
+
 ![HomeScreen_resized](https://user-images.githubusercontent.com/53002105/141104170-0d250dbc-bfab-4233-87eb-d13516ba9b98.jpeg)
 ![LeaderboardScreen_resized](https://user-images.githubusercontent.com/53002105/141104094-58cce3ec-517b-412c-9d7c-9f2d49736b44.jpeg)
