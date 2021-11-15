@@ -12,6 +12,12 @@ jobs:
           channel: "stable"
       - name: Run format
         run: flutter format -l 120 --set-exit-if-changed .
-      - name: Run analysis
+      - name: Run analysis number shapes
         working-directory: ./homework-3-number-shapes
+        run: flutter analyze
+      - name: Run analysis guess number
+        working-directory: ./homework-2-guess-number
+        run: flutter analyze
+      - name: Run analysis currency converter
+        working-directory: ./homework-1-currency-converter
         run: flutter analyze
