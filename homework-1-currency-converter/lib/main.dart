@@ -35,9 +35,7 @@ class _MyHomePageState extends State<MyHomePage> {
   void _convert() {
     try {
       setState(() {
-        _ronValue =
-            (double.parse(euroController.text) * 4.5).toStringAsFixed(2) +
-                ' RON';
+        _ronValue = (double.parse(euroController.text) * 4.5).toStringAsFixed(2) + ' RON';
         _validate = true;
       });
     } on Exception catch (_) {
@@ -59,8 +57,7 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
-            Image.network(
-                'https://i0.1616.ro/media/2/2621/33211/20372704/1/9v8a2732.jpg'),
+            Image.network('https://i0.1616.ro/media/2/2621/33211/20372704/1/9v8a2732.jpg'),
             FractionallySizedBox(
               child: TextField(
                 controller: euroController,

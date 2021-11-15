@@ -11,7 +11,7 @@
 ///      fonts:
 ///       - asset: fonts/MyFlutterApp.ttf
 ///
-/// 
+///
 /// * Iconic, Copyright (C) 2012 by P.J. Onori
 ///         Author:    P.J. Onori
 ///         License:   SIL (http://scripts.sil.org/OFL)

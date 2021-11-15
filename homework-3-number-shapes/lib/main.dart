@@ -73,8 +73,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 right: 20.0,
                 bottom: 20.0,
               ),
-              child: const Text(
-                  'Please input a number to see if it is square or cube.',
+              child: const Text('Please input a number to see if it is square or cube.',
                   style: TextStyle(
                     fontSize: 20,
                   )),
