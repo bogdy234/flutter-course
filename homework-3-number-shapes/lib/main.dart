@@ -32,17 +32,17 @@ class MyHomePage extends StatefulWidget {
 }
 
 bool isSquare(num value) {
-  num x = sqrt(value).round();
+  final num x = sqrt(value).round();
   return x * x == value;
 }
 
 bool isCube(num value) {
-  num x = pow(value, 1 / 3).round();
+  final num x = pow(value, 1 / 3).round();
   return x * x * x == value;
 }
 
-bool isSquareAndCube(value) {
-  return (isSquare(value) && isCube(value));
+bool isSquareAndCube(num value) {
+  return isSquare(value) && isCube(value);
 }
 
 class _MyHomePageState extends State<MyHomePage> {
@@ -65,7 +65,6 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
             Container(
               margin: const EdgeInsets.only(
@@ -95,7 +94,7 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          num? value = num.tryParse(inputController.text);
+          final num? value = num.tryParse(inputController.text);
           if (value != null) {
             setState(() {
               if (isSquareAndCube(value)) {
@@ -109,7 +108,7 @@ class _MyHomePageState extends State<MyHomePage> {
               }
             });
             FocusScope.of(context).unfocus();
-            showDialog(
+            showDialog<void>(
               context: context,
               builder: (BuildContext context) => _buildPopupDialog(context),
             );
