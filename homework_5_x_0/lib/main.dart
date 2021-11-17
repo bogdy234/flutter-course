@@ -36,19 +36,16 @@ Color getColor(int value) {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  List<List<int>> tableValues =
-      List<List<int>>.generate(3, (int index) => <int>[0, 0, 0]);
+  List<List<int>> tableValues = List<List<int>>.generate(3, (int index) => <int>[0, 0, 0]);
 
   int playerTurn = 1;
 
   bool checkWin(int value) {
-    final List<List<int>> newTableValues =
-        List<List<int>>.generate(3, (int index) => <int>[0, 0, 0]);
+    final List<List<int>> newTableValues = List<List<int>>.generate(3, (int index) => <int>[0, 0, 0]);
 
     // Check for line winning
     for (int i = 0; i < tableValues.length; i++) {
-      final List<int> filteredList =
-          tableValues[i].where((int element) => element == value).toList();
+      final List<int> filteredList = tableValues[i].where((int element) => element == value).toList();
 
       if (filteredList.length == tableValues.length) {
         for (int j = 0; j < tableValues[i].length; j++) {
@@ -63,11 +60,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
     // Check for column winning
     for (int j = 0; j < tableValues.length; j++) {
-      final List<int> column = tableValues
-          .map<int>((List<int> row) => row[j])
-          .toList(growable: false);
-      final List<int> filteredList =
-          column.where((int element) => element == value).toList();
+      final List<int> column = tableValues.map<int>((List<int> row) => row[j]).toList(growable: false);
+      final List<int> filteredList = column.where((int element) => element == value).toList();
       if (filteredList.length == tableValues.length) {
         for (int i = 0; i < tableValues.length; i++) {
           newTableValues[i][j] = value;
@@ -93,10 +87,8 @@ class _MyHomePageState extends State<MyHomePage> {
       }
     }
 
-    final List<int> filteredListPrincipal =
-        principalDiagonal.where((int diagValue) => diagValue == value).toList();
-    final List<int> filteredListSecondary =
-        secondaryDiagonal.where((int diagValue) => diagValue == value).toList();
+    final List<int> filteredListPrincipal = principalDiagonal.where((int diagValue) => diagValue == value).toList();
+    final List<int> filteredListSecondary = secondaryDiagonal.where((int diagValue) => diagValue == value).toList();
 
     if (filteredListPrincipal.length == tableValues.length) {
       for (int i = 0; i < tableValues.length; i++) {
