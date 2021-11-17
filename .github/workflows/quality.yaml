@@ -24,6 +24,6 @@ jobs:
       - name: Run analysis basic phrases
         working-directory: ./homework-4-basic-phrases
         run: flutter analyze
-       - name: Run analysis x & 0
+      - name: Run analysis x & 0
         working-directory: ./homework_5_x_0
         run: flutter analyze

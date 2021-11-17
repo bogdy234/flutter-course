@@ -9,11 +9,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Basic Phrases',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MyHomePage(title: 'Basic Phrases'),
     );
   }
 }
@@ -26,6 +26,34 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
+Widget getCard(String cardText) {
+  return Container(
+    decoration: BoxDecoration(
+      gradient: LinearGradient(colors: <Color>[
+        Colors.blue.shade700,
+        Colors.blue.shade300,
+      ]),
+      borderRadius: const BorderRadius.all(Radius.circular(12.0)),
+    ),
+    child: Align(
+      child: Text(
+        cardText,
+        style: const TextStyle(color: Colors.white),
+      ),
+    ),
+  );
+}
+
+List<Widget> getCards(List<String> cardsText) {
+  final List<Widget> cards = <Widget>[];
+  for (int i = 0; i < cardsText.length; i++) {
+    cards.add(getCard(cardsText[i]));
+  }
+  return cards;
+}
+
+List<String> textForCards = <String>['Salut', 'Ce faci?', 'Cum esti?'];
+
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
@@ -34,18 +62,12 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
         centerTitle: true,
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: const <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              'test',
-            ),
-          ],
-        ),
+      body: GridView.count(
+        mainAxisSpacing: 20.0,
+        crossAxisSpacing: 20.0,
+        padding: const EdgeInsets.all(10.0),
+        crossAxisCount: 2,
+        children: getCards(textForCards),
       ),
     );
   }
