@@ -20,7 +20,7 @@ void sharedPrefInit() async {
   } catch (err) {
     /// setMockInitialValues initiates shared preference
     /// Adds app-name
-    SharedPreferences.setMockInitialValues({});
+    // SharedPreferences.setMockInitialValues({});
     Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
     final SharedPreferences prefs = await _prefs;
     prefs.setString("app-name", "my-app");
@@ -79,7 +79,8 @@ class MyHomePage extends StatefulWidget {
 
 class CustomMinMaxValueInputFormatter extends TextInputFormatter {
   @override
-  TextEditingValue formatEditUpdate(TextEditingValue oldValue, TextEditingValue newValue) {
+  TextEditingValue formatEditUpdate(
+      TextEditingValue oldValue, TextEditingValue newValue) {
     if (newValue.text != '') {
       int parsedValue = int.parse(newValue.text);
       if (parsedValue < 1 || parsedValue > 100) {
@@ -313,7 +314,8 @@ class _MyHomePageState extends State<MyHomePage> {
 }
 
 class LeaderBoard extends StatelessWidget {
-  const LeaderBoard({Key? key, required this.title, required this.data}) : super(key: key);
+  const LeaderBoard({Key? key, required this.title, required this.data})
+      : super(key: key);
   final String title;
   final List<int> data;
 
