@@ -21,3 +21,9 @@ jobs:
       - name: Run analysis currency converter
         working-directory: ./homework-1-currency-converter
         run: flutter analyze
+      - name: Run analysis basic phrases
+        working-directory: ./homework-4-basic-phrases
+        run: flutter analyze
+       - name: Run analysis x & 0
+        working-directory: ./homework_5_x_0
+        run: flutter analyze
