@@ -24,7 +24,6 @@ class Phrase {
 
   final String phraseText;
   final String audioPath;
-
 }
 
 class MyHomePage extends StatefulWidget {
@@ -81,8 +80,7 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  List<Widget> getCards(List<Phrase> firstCardsText,
-      List<Phrase> secondCardsText) {
+  List<Widget> getCards(List<Phrase> firstCardsText, List<Phrase> secondCardsText) {
     final List<Widget> cards = <Widget>[];
     for (int i = 0; i < firstCardsText.length; i++) {
       cards.add(getCard(firstCardsText[i]));
@@ -103,8 +101,7 @@ class _MyHomePageState extends State<MyHomePage> {
         crossAxisSpacing: 20.0,
         padding: const EdgeInsets.all(10.0),
         crossAxisCount: 2,
-        children: getCards(
-            firstLanguageTextForCards, secondLanguageTextForCards),
+        children: getCards(firstLanguageTextForCards, secondLanguageTextForCards),
       ),
     );
   }
