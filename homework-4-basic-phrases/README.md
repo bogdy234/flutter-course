@@ -1,6 +1,6 @@
 # homework_4_basic_phrases
 
-A new Flutter project.
+Basic Phrases
 
 ## Getting Started
 
